@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Poll</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #997a00; /* Dark yellow background color */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 400px;
+      padding: 20px;
+      background-color: #ffffff; /* White background color */
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin-top: 0;
+      color: #333;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 10px; /* Add space between labels */
+    }
+    .input-container {
+      margin-bottom: 15px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+      margin-top: 5px; /* Add space between text boxes and labels */
+    }
+    button[type="submit"] {
+      padding: 10px 20px;
+      background-color: #007bff; /* Blue submit button */
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button[type="submit"]:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Create a New Poll</h1>
+    <form action="{{ url_for('create_poll') }}" method="POST">
+      <div class="input-container">
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" required>
+      </div>
+      <div class="input-container">
+        <label for="option1">Option 1:</label>
+        <input type="text" id="option1" name="option1" required>
+      </div>
+      <div class="input-container">
+        <label for="option2">Option 2:</label>
+        <input type="text" id="option2" name="option2" required>
+      </div>
+      <div class="input-container">
+        <label for="option3">Option 3:</label>
+        <input type="text" id="option3" name="option3" required>
+      </div>
+      <div class="input-container">
+        <label for="option4">Option 4:</label>
+        <input type="text" id="option4" name="option4" required>
+      </div>
+      <button type="submit">Create Poll</button>
+    </form>
+  </div>
+</body>
+</html>

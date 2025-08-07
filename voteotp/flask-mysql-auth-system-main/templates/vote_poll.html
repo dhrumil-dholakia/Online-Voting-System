@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Poll</title>
+</head>
+<body>
+    <h1>{{ poll.question }}</h1>
+    <form action="{{ url_for('submit_poll') }}" method="POST">
+        <input type="hidden" name="poll_id" value="{{ poll.poll_id }}">
+        <label for="option">Select an option:</label><br>
+        <select id="option" name="option">
+            <option value="{{ poll.option1 }}">{{ poll.option1 }}</option>
+            <option value="{{ poll.option2 }}">{{ poll.option2 }}</option>
+            <option value="{{ poll.option3 }}">{{ poll.option3 }}</option>
+            <option value="{{ poll.option4 }}">{{ poll.option4 }}</option>
+        </select><br><br>
+        <button type="submit">Vote</button>
+    </form>
+</body>
+</html>

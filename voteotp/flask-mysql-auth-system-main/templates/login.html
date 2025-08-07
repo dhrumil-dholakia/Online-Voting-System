@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    {% extends 'app.html' %}
+    {% block content %}
+
+    <style>
+        /* Style for the background image */
+        body {
+            background-image: url('{{ url_for('static', filename='login.png') }}');
+            background-size: 40%; /* Zoom out to contain the entire background */
+            background-position: 10% 59px ; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the background image from repeating */
+            /* Add any additional styles for the background */
+            background-color: #e6c5ff;
+        }
+
+        .form-container {
+            border: 5px solid black;
+            padding: 50px; 
+            max-width: 500px; 
+            margin: 150px auto; /* Center vertically and horizontally */
+            
+            /* Move slightly toward the center */
+            margin-left: 55%; /* Adjust this to move toward the center */
+            margin-right: 25%; /* Adjust this to fine-tune the position */
+            border-radius: 15px;
+        }
+
+        /* Style for transparent labels */
+        label {
+            color: rgba(0, 0, 0, 0.8); /* Set label text color with opacity */
+        }
+    </style>
+
+    <div class="container form-container">
+      <h2>Login form</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% endwith %}
+
+
+      <form action="/login" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.email.label(for="email", class="transparent-label")}}
+            {{ form.email(id="email", class="form-control")}}
+  
+            {% if form.email.errors %}
+                  <ul>
+                      {% for error in form.email.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                  </ul>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.password.label(for="password", class="transparent-label")}}
+            {{ form.password(id="password", class="form-control")}}
+
+            {% if form.password.errors %}
+                    <ul>
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+            {% endif %}
+        </div>
+        {{ form.submit(class="btn btn-dark mt-4")}}
+        <a href="/register" class="btn btn-secondary mt-4">Register page</a>
+      </form>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

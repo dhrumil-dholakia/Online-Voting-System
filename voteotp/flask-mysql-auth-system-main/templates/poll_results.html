@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll Results</title>
+    <!-- Google Fonts for modern styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Single background color */
+        body {
+            font-family: 'Poppins', sans-serif; /* Use modern font family */
+            margin: 0;
+            padding: 20px; /* Add padding around the page */
+            background-color: #d0eaff; /* Light gray background color */
+        }
+
+        /* Poll results container */
+        .container {
+            max-width: 600px; /* Set maximum width */
+            margin: 0 auto; /* Center the container */
+            background-color: white; /* White background for the container */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
+        }
+
+        /* Heading style */
+        h2 {
+            font-size: 26px; /* Larger font size */
+            font-weight: 600; /* Slightly bolder */
+            color: #333; /* Darker text color */
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        /* List style */
+        ul {
+            list-style-type: none; /* No bullet points */
+            padding: 0; /* Remove padding */
+            margin-bottom: 20px; 
+        }
+
+        /* List item styling */
+        li {
+            font-size: 18px; /* Larger text size */
+            color: #555; /* Dark gray text color */
+            padding: 10px; /* Padding around list items */
+            border-radius: 8px; 
+            background-color: #f1f1f1; 
+            margin-bottom: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 25px; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+        }
+
+        /* Button container for alignment */
+        .button-container {
+            text-align: center; 
+            margin-top: 20px; 
+        }
+
+        /* Link styling for button */
+        a {
+            text-decoration: none; 
+            margin-right: 10px; 
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main container for poll results -->
+    <div class="container"> 
+        {% for question, option_votes in poll_results.items() %}
+            <h2>{{ question }}</h2> 
+            <ul>
+                {% for option, vote_count in option_votes.items() %}
+                    <li>
+                        <span>{{ option }}</span>
+                        <span>{{ vote_count }} votes</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+
+        <!-- Button container for additional options -->
+        <div class="button-container">
+            <a href="{{ url_for('polls') }}">
+                <button>Vote Another Poll</button>
+            </a>
+        
+        </div>
+    </div>
+</body>
+
+</html>

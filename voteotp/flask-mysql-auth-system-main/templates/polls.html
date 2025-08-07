@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System</title>
+    <!-- Link to Google Fonts for modern fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Poppins', sans-serif; /* Use a modern font family */
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7; /* Light grey background color */
+            background-image: url('https://media.kasperskydaily.com/wp-content/uploads/sites/92/2020/10/16044143/M187_Digital-voting-header.png'); /* Add the background image */
+            background-size: cover; /* Scale the background image to cover the whole body */
+            background-attachment: fixed; /* Optional: Keeps the background fixed during scrolling */
+            background-position: center; /* Center the background image */
+        }
+
+        /* Heading style */
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+            font-size: 36px; /* Increased font size */
+            font-weight: 600; /* Bold text */
+            background-color: #f0f8ff; /* Light blue background for emphasis */
+            padding: 10px 20px; /* Added padding */
+            border-radius: 8px; /* Rounded corners */
+            display: inline-block; /* Make the heading stand out */
+        }
+
+        /* Polls container style */
+        .polls-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Larger minimum width for broader polls */
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        /* Poll container style */
+        .poll-container {
+            background-color: #fff;
+            border-radius: 10px; /* More rounded corners */
+            padding: 20px; /* Added padding for a spacious look */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .poll-container:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Poll title style */
+        .poll-container h3 {
+            margin: 0;
+            font-size: 20px; /* Larger font size */
+            color: #333;
+        }
+
+        /* Link style for poll titles */
+        .poll-container a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .poll-container a:hover {
+            color: #0056b3;
+        }
+
+        /* Different background colors for each poll container */
+        .poll-container:nth-child(1) {
+            background-color: #c8e6c9; /* Light Green */
+        }
+        .poll-container:nth-child(2) {
+            background-color: #bbdefb; /* Light Blue */
+        }
+        .poll-container:nth-child(3) {
+            background-color: #ffccbc; /* Light Orange */
+        }
+        .poll-container:nth-child(4) {
+            background-color: #d1c4e9; /* Light Purple */
+        }
+        .poll-container:nth-child(5) {
+            background-color: #ffff8d; /* Light Yellow */
+        }
+        .poll-container:nth-child(6) {
+            background-color: #ffecb3; /* Light Peach */
+        }
+        .poll-container:nth-child(7) {
+            background-color: #c5cae9; /* Light Indigo */
+        }
+        .poll-container:nth-child(8) {
+            background-color: #dcedc8; /* Light Lime Green */
+        }
+        .poll-container:nth-child(9) {
+            background-color: #b2dfdb; /* Light Teal */
+        }
+
+        /* Button container style */
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Button style */
+        .button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px; /* Increased font size */
+            font-weight: 600; /* Bold text */
+            text-decoration: none;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Button shadow */
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Display flash messages if any -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Page heading -->
+    <h1>Online Voting System</h1>
+
+    <!-- Polls container -->
+    <div class="polls-container">
+        {% for poll in polls %}
+            <div class="poll-container">
+                <h3><a href="{{ url_for('poll', poll_id=poll[0]) }}">{{ poll[1] }}</a></h3>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Button container -->
+    <div class="button-container">
+        {% if session.get('email') == 'dhrumildholakia66@gmail.com' %}
+            <a href="{{ url_for('create_poll') }}" class="button">Create Poll</a>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

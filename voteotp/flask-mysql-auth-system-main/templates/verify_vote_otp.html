@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/colorthief/2.3.0/colorthief.umd.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <!-- Link to Google Fonts for modern fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Background image setup */
+        body {
+            background-image: url('{{ url_for('static', filename='otp.png') }}');
+            background-size: 40%; 
+            background-position: 10% 59px; 
+            background-repeat: no-repeat; 
+        }
+
+        /* Larger form container */
+        .form-container {
+            border: 5px solid black; 
+            padding: 70px; 
+            max-width: 600px; 
+            margin: 150px auto; 
+            margin-left: 50%; 
+            border-radius: 15px; 
+        }
+
+        /* Transparent labels with increased font size */
+        label {
+            color: rgba(0, 0, 0, 0.8); 
+            font-weight: 500; 
+            font-size: 18px; /* Increased font size for visibility */
+        }
+
+        .form-control {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 12px; 
+            font-size: 16px;
+            width: 100%; 
+            box-sizing: border-box; 
+            margin-bottom: 20px; 
+        }
+
+        /* Style for the verify button */
+        .btn-verify {
+            background-color: #007BFF; 
+            color: #fff; 
+            border: none;
+            border-radius: 5px; 
+            padding: 12px 24px; 
+            font-size: 16px;
+            text-transform: uppercase; 
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-verify:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container"> 
+        <!-- Form heading -->
+        <h1>Verify OTP</h1>
+
+        <!-- Display flash messages if any -->
+        {% if messages %}
+        <div class="alert">
+            <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- OTP form -->
+        <form method="POST">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required class="form-control"> 
+            <button type="submit" class="btn-verify">Verify OTP</button> 
+        </form>
+    </div>
+</body>
+
+</html>
